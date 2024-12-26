@@ -15,8 +15,6 @@ struct ProfileCardsList: View {
         
         VStack(alignment: .leading, spacing: 0) {
             ProfileCard(model: $model, namespace: namespace)
-                //.clipShape(RoundedRectangle(cornerRadius: 16))
-                
         }
         .padding(.bottom, 8)
         .background(

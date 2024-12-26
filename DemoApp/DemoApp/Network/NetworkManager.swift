@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-var __CONTENT_SERVER_ADDRESS__ = "https://randomuser.me/api/?results=100"
+var __CONTENT_SERVER_ADDRESS__ = "https://randomuser.me/api/?results=50"
 
 protocol NetworkManagerProtocol: AnyObject {
     func fetchContent() async throws -> [ContentResult]
