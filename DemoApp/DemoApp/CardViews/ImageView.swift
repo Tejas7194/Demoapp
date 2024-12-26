@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct CardAysncImageView: View {
+struct ImageView: View {
     var viewModel: AsyncImageViewModel
     
     var body: some View {

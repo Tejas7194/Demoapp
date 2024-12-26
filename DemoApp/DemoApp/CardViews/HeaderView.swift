@@ -12,7 +12,7 @@ struct HeaderView: View {
         VStack {
             HeaderTopSection()
                 .padding(.horizontal, 16)
-                .background(.shaadiRed)
+                .background(.colorRed)
                 .foregroundStyle(.white)
         }
     }
@@ -23,11 +23,7 @@ struct HeaderTopSection: View {
         HStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Image(systemName: "message.fill")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                    
-                    Text("Profile Matches")
+                    Text("Profiles ")
                         .font(.system(size: 24, weight: .heavy, design: .rounded))
                 }
                 .padding(.vertical)

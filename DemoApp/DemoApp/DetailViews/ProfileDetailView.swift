@@ -17,42 +17,21 @@ struct ProfileDetailView: View {
         ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
             VStack(alignment: .leading) {
                 ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom)) {
-                    CardAysncImageView(viewModel: AsyncImageViewModel(imageAssest: model.image ?? ""))
+                    ImageView(viewModel: AsyncImageViewModel(imageAssest: model.image ?? ""))
                         .matchedGeometryEffect(id: model.image ?? "", in: namespace)
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-                    if showContent {
-                        if let isAccepted = model.isAccepted {
-                            VStack(spacing: 8) {
-                                Rectangle()
-                                    .frame(height: 12)
-                                    .opacity(0)
-                                
-                                Divider()
-                                    .background(.white)
-                                    .padding(.horizontal)
-                                
-                                Text(isAccepted ? "Accepted" : "Declined")
-                                    .font(.system(size: 24, weight: .bold))
-                                    .foregroundColor(isAccepted ? .green : .red)
-                                    .padding()
-                                    .background(.clear)
-                                    .transition(.opacity.combined(with: .scale))
-                                    .padding(.bottom)
-                            }
-                        } else {
-                            AcceptRejectView(model: $model)
-                                .padding(.horizontal)
-                                .padding(.bottom)
-                                .offset(y: UIScreen.main.bounds.width * 0.1)
-                        }
-                    }
                 }
                 .padding(.bottom, 16)
-                Text(model.fullName ?? "")
-                    .font(.title)
-                    .fontWeight(.heavy)
-                    .padding(.leading)
-                
+                HStack(spacing: 0) {
+                    Text(model.fullName ?? "")
+                        .font(.title)
+                        .fontWeight(.heavy)
+
+                    Text(", \(model.dob ?? 0) Yrs")
+                        .font(.title)
+                        .fontWeight(.heavy)
+                }
+                .padding(.horizontal, 16)
                 Text(model.address ?? "")
                     .font(.caption)
                     .fontWeight(.semibold)
@@ -85,7 +64,7 @@ struct ProfileDetailView: View {
                         .font(.system(size: 24))
                         .padding()
                         .onTapGesture {
-                            withAnimation(.bouncy) {
+                            withAnimation(.spring) {
                                 show.toggle()
                             }
                         }
@@ -106,11 +85,5 @@ struct ProfileDetailView: View {
             }
         }
         .background(ignoresSafeAreaEdges: .all)
-    }
-}
-
-extension Animation {
-    static var hero: Animation {
-        .interactiveSpring(response: 0.6, dampingFraction: 0.85, blendDuration: 0.6)
     }
 }

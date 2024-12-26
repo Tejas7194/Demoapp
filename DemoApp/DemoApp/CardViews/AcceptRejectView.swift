@@ -14,50 +14,39 @@ struct AcceptRejectView: View {
     var body: some View {
         ZStack {
             HStack {
-                Button(action: {
-                    withAnimation {
-                        model.isAccepted = false
-                    }
-                }) {
-                    ZStack {
-                        Circle()
-                            .stroke()
-                            .stroke(.red, lineWidth: 1)
-                            .frame(width: 52, height: 52)
-                        Circle()
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.gray.opacity(0.1))
-                            .overlay(
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(.red)
-                            )
-                    }
-                }
-                
+                StylishTickMarkButton(model: $model, isChecked: false, imageName: "xmark")
                 Spacer()
-                
-                Button(action: {
-                    withAnimation {
-                        model.isAccepted = true
-                    }
-                }) {
-                    ZStack {
-                        Circle()
-                            .stroke()
-                            .stroke(.green, lineWidth: 1)
-                            .frame(width: 52, height: 52)
-                        Circle()
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.gray.opacity(0.2))
-                            .overlay(
-                                Image(systemName: "checkmark")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(.green)
-                            )
-                    }
-                }
+                StylishTickMarkButton(model: $model, isChecked: true, imageName: "checkmark")
             }
         }
+    }
+}
+
+
+struct StylishTickMarkButton: View {
+    @Binding var model: ContentModel
+    var isChecked: Bool?
+    @State var scaleEffect: Bool = false
+    var imageName: String = ""
+    var body: some View {
+        Button(action: {
+            withAnimation(.spring()) {
+                model.isAccepted = isChecked
+                scaleEffect = isChecked ?? false
+            }
+        }) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(isChecked ?? false ? Color.green : Color.red)
+                    .frame(width: 60, height: 60)
+                    .shadow(color: Color.green.opacity(0.5), radius: 8, x: 0, y: 4)
+                
+                Image(systemName: imageName)
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(.white)
+                    .scaleEffect(scaleEffect ? 1.2 : 1.0)
+            }
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }

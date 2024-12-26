@@ -13,7 +13,7 @@ struct ProfileCardsList: View {
     var namespace: Namespace.ID
     var body: some View {
         
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             ProfileCard(model: $model, namespace: namespace)
                 //.clipShape(RoundedRectangle(cornerRadius: 16))
                 

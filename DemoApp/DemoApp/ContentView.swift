@@ -15,7 +15,6 @@ struct ContentView: View {
     @State var selected: ContentModel = ContentModel(fullName: "", image: "")
     @Namespace private var namespace
     let columns = [
-            GridItem(.flexible()),
             GridItem(.flexible())
         ]
     var body: some View {
@@ -23,11 +22,11 @@ struct ContentView: View {
             VStack {
                 HeaderView()
                 ScrollView(showsIndicators: false) {
-                    LazyVGrid(columns: columns, spacing: 0) {
+                    LazyVStack(spacing: 0) {
                         ForEach($viewModel.content, id: \.identifier) { content in
                             ProfileCardsList(model: content, namespace: namespace)
                                 .onTapGesture {
-                                    withAnimation(.bouncy) {
+                                    withAnimation(.spring) {
                                         showNavigation.toggle()
                                         selected = content.wrappedValue
                                     }
